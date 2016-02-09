@@ -12,6 +12,7 @@ namespace StockApp {
 
         public StockBroker(String name) {
             this.name = name;
+            stocks = new List<Stock>();
         }
 
         public void AddStock(Stock stock) {

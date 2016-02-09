@@ -8,10 +8,13 @@ using System.Threading.Tasks;
 namespace StockApp {
     class Stock {
 
+        public delegate void StockNotification(object sender, StockNotificationEventArgs args);
+
+        public event StockNotification ThresholdReached;
+
         private String name;
         private readonly int initialValue;
         private int currentValue;
-        private int changeOfValue;
         private readonly int threshold;
         private readonly int maxChange;
 
@@ -21,16 +24,39 @@ namespace StockApp {
             this.threshold = threshold;
             this.maxChange = maxChange;
             currentValue = initialValue;
-            changeOfValue = 0;
             // Initializes a thread using a lambda expression as the run behavior
             Thread thread = new Thread(() => {
-                for (int i = 0; i < 3; i ++) {
-                    changeOfValue += new Random().Next(-maxChange, maxChange);
-                    Console.WriteLine("{0} value before: {1} after: {2}", name, currentValue, currentValue += changeOfValue);
+                int numberOfChanges = 0;
+                for (;;) {
+                    currentValue += new Random().Next(-maxChange, maxChange);
+                    numberOfChanges++;
+                    if (Math.Abs(currentValue - initialValue) > threshold) {
+                        OnThresholdReached(new StockNotificationEventArgs(name, currentValue, numberOfChanges));
+                    }
                     Thread.Sleep(500);
                 }
             });
             thread.Start();
+        }
+
+        protected void OnThresholdReached(StockNotificationEventArgs args) {
+            StockNotification handler = ThresholdReached;
+            if (handler != null) {
+                handler(this, args);
+            }
+        }
+
+    }
+
+    public class StockNotificationEventArgs : EventArgs {
+        public String Name;
+        public int CurrentValue;
+        public int NumberOfChanges;
+
+        public StockNotificationEventArgs(String name, int currentValue, int numberOfChanges) {
+            Name = name;
+            CurrentValue = currentValue;
+            NumberOfChanges = numberOfChanges;
         }
     }
 }

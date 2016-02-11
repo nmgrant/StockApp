@@ -34,7 +34,8 @@ namespace CECS475.Assignment3 {
 
         public string Name { get; set; }
 
-        protected void OnThresholdReached(StockNotificationEventArgs args1, StockToFileEventArgs args2) {
+        protected void OnThresholdReached(StockNotificationEventArgs args1, 
+            StockToFileEventArgs args2) {
             EventHandler<StockNotificationEventArgs> eventHandler = stockEvent;
             if (eventHandler != null) {
                 eventHandler(this, args1);
@@ -46,12 +47,13 @@ namespace CECS475.Assignment3 {
         }
 
         public void ChangeStockValue(ref int numberOfChanges) {
-            currentValue += new Random().Next(-maxChange, maxChange);
+            currentValue += new Random().Next(1, maxChange);
             numberOfChanges++;
             if (Math.Abs(currentValue - initialValue) > threshold) {
-                OnThresholdReached(new StockNotificationEventArgs(name,
-                    currentValue, numberOfChanges), new StockToFileEventArgs(DateTime.Now, this.name, this.currentValue,
-                    this.initialValue));
+                OnThresholdReached(new StockNotificationEventArgs(name, 
+                    currentValue, numberOfChanges), 
+                    new StockToFileEventArgs(DateTime.Now, this.name, 
+                    this.currentValue, this.initialValue));
             }
         }
     }
@@ -75,7 +77,8 @@ namespace CECS475.Assignment3 {
         public int CurrentValue;
         public int InitialValue;
 
-        public StockToFileEventArgs(DateTime dateTime, string name, int currentValue, int initialValue) {
+        public StockToFileEventArgs(DateTime dateTime, string name, 
+            int currentValue, int initialValue) {
             DateTime = dateTime;
             Name = name;
             CurrentValue = currentValue;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace CECS475.Assignment3 {
     class StockBroker {
@@ -19,8 +18,13 @@ namespace CECS475.Assignment3 {
             stocks.Add(stock);
         }
 
-        public void stockThresholdReached(object sender, StockNotificationEventArgs e) {
-            Console.WriteLine("The threshold of {0} was reached at {1}.", e.Name, e.NumberOfChanges);
+        public void stockThresholdReached(object sender,
+            StockNotificationEventArgs e) {
+            lock (sender) {
+                Console.WriteLine(brokerName.PadRight(20) + e.Name.PadRight(20)
+                + e.CurrentValue.ToString().PadRight(15)
+                + e.NumberOfChanges.ToString().PadRight(15));
+            }
         }
     }
 }

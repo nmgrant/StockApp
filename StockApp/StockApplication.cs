@@ -24,6 +24,10 @@
             b4.AddStock(stock2);
             b4.AddStock(stock3);
             b4.AddStock(stock4);
+
+            System.Console.WriteLine("Broker".PadRight(20) 
+                + "Stock".PadRight(20) + "Value".PadRight(15)
+                + "Changes".PadRight(15) + "\n");
         }
     }
 }

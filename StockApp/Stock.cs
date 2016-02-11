@@ -10,7 +10,7 @@ namespace StockApp {
 
         public delegate void StockNotification(object sender, StockNotificationEventArgs args);
 
-        public event StockNotification ThresholdReached;
+        public event StockNotification stockEvent;
 
         private String name;
         private readonly int initialValue;
@@ -38,8 +38,7 @@ namespace StockApp {
         public String Name { get; set; }
 
         protected void OnThresholdReached(StockNotificationEventArgs args) {
-            StockNotification handler = ThresholdReached;
-            Console.WriteLine("Stock: {0}\t Changes: {1}", args.Name, args.NumberOfChanges);
+            StockNotification handler = stockEvent;
             if (handler != null) {
                 handler(this, args);
             }

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace StockApp {
+namespace CECS475.Assignment3 {
     class StockBroker {
 
         private String name;

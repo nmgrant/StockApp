@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockApp", "StockApp\StockApp.csproj", "{78795A9D-2BD3-417A-9102-32F4C8F67868}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CECS475.Assignment3", "StockApp\CECS475.Assignment3.csproj", "{78795A9D-2BD3-417A-9102-32F4C8F67868}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

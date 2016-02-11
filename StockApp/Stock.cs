@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace StockApp {
+namespace CECS475.Assignment3 {
     class Stock {
 
         public delegate void StockNotification(object sender, StockNotificationEventArgs args);

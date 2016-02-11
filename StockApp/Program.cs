@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockApp {
+namespace CECS475.Assignment3 {
     class Program {
         static void Main(string[] args) {
             Stock stock1 = new Stock("Technology", 160, 5, 15);

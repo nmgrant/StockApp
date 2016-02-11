@@ -24,15 +24,14 @@ namespace StockApp {
             this.threshold = threshold;
             this.maxChange = maxChange;
             currentValue = initialValue;
-            // Initializes a thread using a lambda expression as the run behavior
-            Thread thread = new Thread(() => {
+            // Initializes and starts a thread using a lambda expression as the run behavior
+            new Thread(() => {
                 int numberOfChanges = 0;
                 for (;;) {
                     Thread.Sleep(500);
                     ChangeStockValue(ref numberOfChanges);
                 }
-            });
-            thread.Start();
+            }).Start();
         }
 
         public String Name { get; set; }

@@ -28,24 +28,30 @@ namespace StockApp {
             Thread thread = new Thread(() => {
                 int numberOfChanges = 0;
                 for (;;) {
-                    currentValue += new Random().Next(-maxChange, maxChange);
-                    numberOfChanges++;
-                    if (Math.Abs(currentValue - initialValue) > threshold) {
-                        OnThresholdReached(new StockNotificationEventArgs(name, currentValue, numberOfChanges));
-                    }
                     Thread.Sleep(500);
+                    ChangeStockValue(ref numberOfChanges);
                 }
             });
             thread.Start();
         }
 
+        public String Name { get; set; }
+
         protected void OnThresholdReached(StockNotificationEventArgs args) {
             StockNotification handler = ThresholdReached;
+            Console.WriteLine("Stock: {0}\t Changes: {1}", args.Name, args.NumberOfChanges);
             if (handler != null) {
                 handler(this, args);
             }
         }
 
+        public void ChangeStockValue(ref int numberOfChanges) {
+            currentValue += new Random().Next(-maxChange, maxChange);
+            numberOfChanges++;
+            if (Math.Abs(currentValue - initialValue) > threshold) {
+                OnThresholdReached(new StockNotificationEventArgs(name, currentValue, numberOfChanges));
+            }
+        }
     }
 
     public class StockNotificationEventArgs : EventArgs {

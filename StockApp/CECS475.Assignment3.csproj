@@ -43,10 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="StockApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stock.cs" />
     <Compile Include="StockBroker.cs" />
+    <Compile Include="StreamWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

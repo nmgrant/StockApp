@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CECS475.Assignment3 {
-    class Program {
+﻿namespace CECS475.Assignment3 {
+    class StockApplication {
         static void Main(string[] args) {
             Stock stock1 = new Stock("Technology", 160, 5, 15);
             Stock stock2 = new Stock("Retail", 30, 2, 6);

@@ -6,19 +6,21 @@ namespace CECS475.Assignment3 {
 
         public event EventHandler<StockNotificationEventArgs> stockEvent;
 
-        private String name;
+        private string name;
         private readonly int initialValue;
         private int currentValue;
         private readonly int threshold;
         private readonly int maxChange;
 
-        public Stock(String name, int initialValue, int maxChange, int threshold) {
+        public Stock(string name, int initialValue, int maxChange, 
+            int threshold) {
             this.name = name;
             this.initialValue = initialValue;
             this.threshold = threshold;
             this.maxChange = maxChange;
             currentValue = initialValue;
-            // Initializes and starts a thread using a lambda expression as the run behavior
+            // Initializes and starts a thread using a lambda expression as the
+            // run behavior
             new Thread(() => {
                 int numberOfChanges = 0;
                 for (;;) {
@@ -28,7 +30,7 @@ namespace CECS475.Assignment3 {
             }).Start();
         }
 
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         protected void OnThresholdReached(StockNotificationEventArgs args) {
             EventHandler<StockNotificationEventArgs> handler = stockEvent;
@@ -41,17 +43,19 @@ namespace CECS475.Assignment3 {
             currentValue += new Random().Next(-maxChange, maxChange);
             numberOfChanges++;
             if (Math.Abs(currentValue - initialValue) > threshold) {
-                OnThresholdReached(new StockNotificationEventArgs(name, currentValue, numberOfChanges));
+                OnThresholdReached(new StockNotificationEventArgs(name, 
+                    currentValue, numberOfChanges));
             }
         }
     }
 
     public class StockNotificationEventArgs : EventArgs {
-        public String Name;
+        public string Name;
         public int CurrentValue;
         public int NumberOfChanges;
 
-        public StockNotificationEventArgs(String name, int currentValue, int numberOfChanges) {
+        public StockNotificationEventArgs(string name, int currentValue, 
+            int numberOfChanges) {
             Name = name;
             CurrentValue = currentValue;
             NumberOfChanges = numberOfChanges;

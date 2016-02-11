@@ -2,11 +2,9 @@
 using System.Threading;
 
 namespace CECS475.Assignment3 {
-    class Stock {
+    class Stock { 
 
-        public delegate void StockNotification(object sender, StockNotificationEventArgs args);
-
-        public event StockNotification stockEvent;
+        public event EventHandler<StockNotificationEventArgs> stockEvent;
 
         private String name;
         private readonly int initialValue;
@@ -33,7 +31,7 @@ namespace CECS475.Assignment3 {
         public String Name { get; set; }
 
         protected void OnThresholdReached(StockNotificationEventArgs args) {
-            StockNotification handler = stockEvent;
+            EventHandler<StockNotificationEventArgs> handler = stockEvent;
             if (handler != null) {
                 handler(this, args);
             }

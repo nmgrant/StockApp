@@ -6,6 +6,7 @@ namespace CECS475.Assignment3 {
 
         private String brokerName;
         private List<Stock> stocks;
+        private readonly object thisLock = new object();
 
         public StockBroker(String name) {
             this.brokerName = name;
@@ -20,7 +21,7 @@ namespace CECS475.Assignment3 {
 
         public void stockThresholdReached(object sender,
             StockNotificationEventArgs e) {
-            lock (sender) {
+            lock (thisLock) {
                 Console.WriteLine(brokerName.PadRight(20) + e.Name.PadRight(20)
                 + e.CurrentValue.ToString().PadRight(15)
                 + e.NumberOfChanges.ToString().PadRight(15));

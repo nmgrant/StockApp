@@ -48,7 +48,7 @@ namespace CECS475.Assignment3 {
             // each loop iteration. Changes the stock value in each
             // iteration.
             for (;;) {
-               Thread.Sleep(500);
+               Thread.Sleep(100);
                ChangeStockValue(ref numberOfChanges);
             }
          }).Start();

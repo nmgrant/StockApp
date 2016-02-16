@@ -49,31 +49,6 @@ namespace CECS475.Assignment3 {
             Console.WriteLine(brokerName.PadRight(20) + e.Name.PadRight(20)
             + e.CurrentValue.ToString().PadRight(15)
             + e.NumberOfChanges.ToString().PadRight(15));
-
-            printCounter++;
-
-            if (printCounter == MAX_STOCK_COUNTER) {
-               if (userContinuePrintOut()) {
-                  Console.WriteLine("User exited simulation.");
-                  Environment.Exit(0);
-               }
-               printCounter = 0;
-            }
-         }
-      }
-
-      // Asks the user if it wishes to continue and returns the response.
-      public bool userContinuePrintOut() {
-         Console.WriteLine("\nWould you like to view more threads? Y/N\n");
-         while (true) {
-            string userInput = Console.ReadLine();
-            if (userInput.Equals("Y") || userInput.Equals("y")) {
-               return false;
-            } else if (userInput.Equals("N") || userInput.Equals("n")) {
-               return true;
-            } else {
-               Console.WriteLine("Invalid input was entered.");
-            }
          }
       }
    }

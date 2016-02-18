@@ -14,13 +14,6 @@ namespace CECS475.Assignment3 {
       // the console at a time
       private readonly object thisLock = new object();
 
-      // The max number of stocks to be printed to the console
-      // before the user is asked if they wish to continue
-      private const int MAX_STOCK_COUNTER = 20;
-
-      // Initialize the number of messages printed to 0
-      private int printCounter = 0;
-
       // StockBroker constructor initializing the name and list of stocks
       public StockBroker(String name) {
          this.brokerName = name;

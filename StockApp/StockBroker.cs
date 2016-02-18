@@ -12,7 +12,7 @@ namespace CECS475.Assignment3 {
 
       // A lock object used to ensure that only one thread accesses
       // the console at a time
-      private readonly object thisLock = new object();
+      private static readonly object thisLock = new object();
 
       // StockBroker constructor initializing the name and list of stocks
       public StockBroker(String name) {
@@ -24,9 +24,9 @@ namespace CECS475.Assignment3 {
       // event handlers: the write to console handler, and the write
       // to file handler. Then, the stock is added to the broker's list
       public void AddStock(Stock stock) {
+         stocks.Add(stock);
          stock.stockEvent += stockThresholdReached;
          stock.stockToFileEvent += StreamWriterClass.WriteToFile;
-         stocks.Add(stock);
       }
 
       // Event handler used to write the status of the stock to 

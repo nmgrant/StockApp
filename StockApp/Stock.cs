@@ -12,6 +12,10 @@ namespace CECS475.Assignment3 {
       // This stock event writes the status of the stock to the file
       public event EventHandler<StockToFileEventArgs> stockToFileEvent;
 
+      // A lock object used to ensure that only one thread accesses
+      // the console at a time
+      private static readonly object thisLock = new object();
+
       // The name of the stock
       private string name;
 
@@ -63,16 +67,20 @@ namespace CECS475.Assignment3 {
       protected void OnThresholdReached(StockNotificationEventArgs args1,
          StockToFileEventArgs args2) {
 
-         // Calls the write to console event handler
-         EventHandler<StockNotificationEventArgs> eventHandler = stockEvent;
-         if (eventHandler != null) {
-            eventHandler(this, args1);
-         }
+         // Using a lock ensures that no other thread tries to print to the 
+         // console at the same time.
+         lock (thisLock) {
+            // Calls the write to console event handler
+            EventHandler<StockNotificationEventArgs> eventHandler = stockEvent;
+            if (eventHandler != null) {
+               eventHandler(this, args1);
+            }
 
-         // Calls the write to file event handler
-         EventHandler<StockToFileEventArgs> fileHandler = stockToFileEvent;
-         if (fileHandler != null) {
-            fileHandler(this, args2);
+            // Calls the write to file event handler
+            EventHandler<StockToFileEventArgs> fileHandler = stockToFileEvent;
+            if (fileHandler != null) {
+               fileHandler(this, args2);
+            }
          }
       }
 
